@@ -1,0 +1,123 @@
+export const mockInventoryItems = [
+    {
+        id: "1",
+        name: "Tomatoes",
+        description: "Fresh organic tomatoes",
+        quantity: 25,
+        spoilage: false,
+        unit: "kg",
+        expirationDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days from now
+        restaurantId: "rest1",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    },
+    {
+        id: "2",
+        name: "Lettuce",
+        description: "Iceberg lettuce",
+        quantity: 15,
+        spoilage: false,
+        unit: "kg",
+        expirationDate: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString(), // 4 days from now
+        restaurantId: "rest1",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    },
+    {
+        id: "3",
+        name: "Chicken Breast",
+        description: "Free-range chicken",
+        quantity: 8,
+        spoilage: false,
+        unit: "kg",
+        expirationDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days from now
+        restaurantId: "rest1",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    },
+    {
+        id: "4",
+        name: "Milk",
+        description: "Whole milk",
+        quantity: 12,
+        spoilage: false,
+        unit: "liters",
+        expirationDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(), // 5 days from now
+        restaurantId: "rest1",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    },
+    {
+        id: "5",
+        name: "Eggs",
+        description: "Large free-range eggs",
+        quantity: 60,
+        spoilage: false,
+        unit: "pieces",
+        expirationDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(), // 14 days from now
+        restaurantId: "rest1",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    },
+    {
+        id: "6",
+        name: "Potatoes",
+        description: "Russet potatoes",
+        quantity: 30,
+        spoilage: false,
+        unit: "kg",
+        expirationDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
+        restaurantId: "rest1",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    },
+    {
+        id: "7",
+        name: "Avocados",
+        description: "Ripe avocados",
+        quantity: 5,
+        spoilage: true,
+        unit: "kg",
+        expirationDate: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago (expired)
+        restaurantId: "rest1",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    },
+    {
+        id: "8",
+        name: "Salmon",
+        description: "Fresh Atlantic salmon",
+        quantity: 4,
+        spoilage: false,
+        unit: "kg",
+        expirationDate: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day from now
+        restaurantId: "rest1",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    },
+    {
+        id: "9",
+        name: "Flour",
+        description: "All-purpose flour",
+        quantity: 15,
+        spoilage: false,
+        unit: "kg",
+        expirationDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(), // 90 days from now
+        restaurantId: "rest1",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    },
+    {
+        id: "10",
+        name: "Strawberries",
+        description: "Organic strawberries",
+        quantity: 3,
+        spoilage: true,
+        unit: "kg",
+        expirationDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago (expired)
+        restaurantId: "rest1",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+    },
+]
+
