@@ -4,7 +4,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 
 export async function uploadPhotoVideo({ name, type, data }) {
-   
+
 
     if (!data || !type) {
         console.error("uploadPhotoVideo received invalid data");
@@ -44,7 +44,7 @@ export async function uploadPhotoVideo({ name, type, data }) {
         const response = await fetch(apiUrl, {
             method: "POST",
             body: formData,
-           
+
         });
 
         if (!response.ok) {
@@ -67,9 +67,65 @@ export async function uploadPhotoVideo({ name, type, data }) {
             })
         );
 
-        return {success: true, items: createdItems};
+        return { success: true, items: createdItems };
     } catch (error) {
         console.error("Upload Failed:", error);
-        return {success:false,  error: "Failed to process file" };
+        return { success: false, error: "Failed to process file" };
+    }
+}
+
+
+export async function getInventory(userId) {
+    try {
+        const result = await prisma.inventoryItem.findMany({
+            where: {
+                userId: userId
+            },
+            orderBy: {
+                createdAt: 'desc'
+            },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                quantity: true,
+                spoilage: true,
+                expirationDate: true,
+                createdAt: true,
+                updatedAt: true
+            }
+        });
+
+        return {
+            success: true,
+            items: result
+        };
+    } catch (error) {
+        console.log("Failed to fetch inventory:", error);
+        return {
+            success: false,
+            error: "Failed to fetch inventory items"
+        };
+    }
+}
+
+export async function deleteItem(id) {
+    try {
+        await prisma.inventoryItem.delete({
+            where: {
+                id: id
+            }
+        });
+
+        return {
+            success: true,
+            message: "Item deleted successfully"
+        };
+    } catch (error) {
+        console.error("Failed to delete item:", error);
+        return {
+            success: false,
+            error: "Failed to delete item"
+        };
     }
 }

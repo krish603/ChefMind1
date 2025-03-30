@@ -1,12 +1,40 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { AlertTriangle, AlertCircle } from "lucide-react"
-import { uploadPhotoVideo } from "@/src/actions/inventoryActions"
+import { uploadPhotoVideo, getInventory } from "@/src/actions/inventoryActions"
+import { useRouter } from "next/navigation"
+import { useUser } from "@clerk/nextjs"
 
-export function AlertsSection({ spoiledItems, lowStockItems }) {
+export function AlertsSection() {
     const [uploadedFiles, setUploadedFiles] = useState([])
     const [uploadResponse, setUploadResponse] = useState(null)
+    const [inventoryItems, setInventoryItems] = useState([])
+    const router = useRouter()
+  
+    // Fetch inventory data
+    useEffect(() => {
+        async function fetchInventory() {
+      
+            const result = await getInventory("cuid1")
+            if (result.success) {
+                setInventoryItems(result.items)
+            }
+        }
+        fetchInventory()
+    }, [])
+
+    // Calculate spoiled and near expiry items
+    const spoiledItems = inventoryItems.filter(item => item.spoilage)
+    const nearExpiryItems = inventoryItems.filter(item => {
+        if (!item.expirationDate) return false
+        const expiryDate = new Date(item.expirationDate)
+        const today = new Date()
+        const daysUntilExpiry = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24))
+        return daysUntilExpiry <= 7 && daysUntilExpiry > 0 && !item.spoilage
+    })
+
+    const lowStockItems = inventoryItems.filter(item => item.quantity <= item.lowStockThreshold)
 
     const handleFileInput = async (e) => {
         const file = e.target.files[0];
@@ -36,6 +64,10 @@ export function AlertsSection({ spoiledItems, lowStockItems }) {
             });
 
             setUploadResponse(response);
+            if (response.success) {
+                // Refresh the inventory page data
+                router.reload()
+            }
         } catch (error) {
             console.error("Upload Error:", error);
             setUploadResponse({ error: "Failed to upload file" });
@@ -70,18 +102,18 @@ export function AlertsSection({ spoiledItems, lowStockItems }) {
                     )}
                 </div>
 
-                {/* Low Stock Items */}
-                <div>
-                    <h3 className="font-semibold mb-2">Low Stock Items ({lowStockItems.length})</h3>
-                    {lowStockItems.length === 0 ? (
-                        <p className="text-sm opacity-80">No low stock items.</p>
+                {/* Near Expiry Items */}
+                <div className="mb-6">
+                    <h3 className="font-semibold mb-2">Near Expiry Items ({nearExpiryItems.length})</h3>
+                    {nearExpiryItems.length === 0 ? (
+                        <p className="text-sm opacity-80">No items near expiry.</p>
                     ) : (
                         <ul className="space-y-2">
-                            {lowStockItems.map((item) => (
+                            {nearExpiryItems.map((item) => (
                                 <li key={item.id} className="flex items-center">
-                                    <AlertTriangle className="mr-2 text-yellow-300" size={16} />
+                                    <AlertTriangle className="mr-2 text-orange-300" size={16} />
                                     <span>
-                                        {item.name} - {item.quantity} {item.unit || "units"}
+                                        {item.name} - Expires in {Math.ceil((new Date(item.expirationDate) - new Date()) / (1000 * 60 * 60 * 24))} days
                                     </span>
                                 </li>
                             ))}
@@ -89,6 +121,7 @@ export function AlertsSection({ spoiledItems, lowStockItems }) {
                     )}
                 </div>
             </div>
+              
 
             {/* Upload Section */}
             <div className="bg-white rounded-lg shadow-md p-6">
@@ -125,16 +158,6 @@ export function AlertsSection({ spoiledItems, lowStockItems }) {
                                 </li>
                             ))}
                         </ul>
-                    </div>
-                )}
-
-                {/* Display API response */}
-                {uploadResponse && (
-                    <div className="mt-4">
-                        <h3 className="font-semibold text-[#255653] mb-2">Server Response</h3>
-                        <pre className="text-sm bg-gray-100 p-3 rounded-lg text-[#255653]">
-                            {JSON.stringify(uploadResponse, null, 2)}
-                        </pre>
                     </div>
                 )}
             </div>
