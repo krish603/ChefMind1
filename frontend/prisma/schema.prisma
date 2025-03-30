@@ -1,0 +1,52 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String      @id @default(cuid())
+  email        String      @unique
+  username     String      @unique
+  clerkId      String      @unique
+  name         String?
+  bio          String?
+  image        String?
+  restaurant   Restaurant?
+  restaurantId String? @unique
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model Restaurant {
+  id          String          @id @default(cuid())
+  name        String
+  description String?
+  location    String?
+  website     String?
+  // Owner relation: A restaurant can have one owner (a user)
+  owner       User?           @relation(fields: [userId], references: [id])
+  userId      String?         @unique
+  // One-to-many relation: A restaurant can have many inventory items.
+  inventory   InventoryItem[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model InventoryItem {
+  id             String       @id @default(cuid())
+  name           String
+  description    String?
+  quantity       Int
+  spoilage       Boolean      @default(false)
+  unit           String?      // e.g., kg, liters, pieces
+  expirationDate DateTime?
+  // Inventory is linked to a specific restaurant.
+  restaurant     Restaurant   @relation(fields: [restaurantId], references: [id])
+  restaurantId   String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
