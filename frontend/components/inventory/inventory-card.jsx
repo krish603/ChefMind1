@@ -34,7 +34,7 @@ export function InventoryCard({ item }) {
                 </div>
 
                 <div className="text-[#255653]">
-                    <span className="font-semibold">{item.quantity}</span>{" "}
+                    <span className="font-semibold">Quantity : {item.quantity}</span>{" "}
                     <span className="text-sm">{item.unit || "units"}</span>
                 </div>
 

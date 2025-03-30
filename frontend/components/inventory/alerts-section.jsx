@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { AlertTriangle, AlertCircle } from "lucide-react"
 import { uploadPhotoVideo, getInventory } from "@/src/actions/inventoryActions"
 import { useRouter } from "next/navigation"
-import { useUser } from "@clerk/nextjs"
+
 
 export function AlertsSection() {
     const [uploadedFiles, setUploadedFiles] = useState([])
