@@ -17,6 +17,7 @@ model User {
   image        String?
   restaurant   Restaurant?
   restaurantId String? @unique
+    inventoryItems InventoryItem[]  
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
 }
@@ -42,11 +43,13 @@ model InventoryItem {
   description    String?
   quantity       Int
   spoilage       Boolean      @default(false)
-  unit           String?      // e.g., kg, liters, pieces
   expirationDate DateTime?
   // Inventory is linked to a specific restaurant.
-  restaurant     Restaurant   @relation(fields: [restaurantId], references: [id])
-  restaurantId   String
+
+   user           User          @relation(fields: [userId], references: [id])
+  userId         String
+  restaurant     Restaurant?   @relation(fields: [restaurantId], references: [id])
+  restaurantId   String?
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 }

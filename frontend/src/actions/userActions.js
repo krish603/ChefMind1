@@ -15,7 +15,7 @@ export async function syncAction() {
         })
         if (alreadyUser) {
             return { success: false, message: "user already exists" }
-            th
+            
         }
         const newUser = await prisma.user.create({
             data: {

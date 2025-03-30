@@ -10,7 +10,7 @@ export function HeroSection() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#255653] mb-6">
               Reduce your food waste and save tons annually!
             </h1>
-            <p className="text-lg md:text-xl text-[#54aa52] mb-8">
+            <p className="text-lg md:text-xl text-[#255653] mb-8">
               Smart kitchen inventory management that helps you track, reduce, and save.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -27,7 +27,7 @@ export function HeroSection() {
           </div>
           <div className="md:w-1/2">
             <Image
-              src="/placeholder.svg?height=500&width=600"
+              src="/food-waste-reduction.png"
               alt="Food waste reduction"
               width={600}
               height={500}

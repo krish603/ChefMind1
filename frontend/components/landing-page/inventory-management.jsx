@@ -11,11 +11,11 @@ export function InventoryManagement() {
   ]
 
   return (
-    <section id="inventory" className="py-16 md:py-24 bg-[#255653] text-[#faf6eb]">
+    <section id="inventory" className="py-16 md:py-18 bg-[#255653] text-[#faf6eb]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">How We Manage Inventory</h2>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto">
+          <h2 className="text-3xl text-[#54AA52] md:text-5xl font-bold mb-6">How We Manage Inventory</h2>
+          <p className="text-lg mt-2 md:text-xl mt-2 max-w-3xl mx-auto">
             Our smart inventory system helps you keep track of everything in your kitchen, reducing waste and saving
             money.
           </p>

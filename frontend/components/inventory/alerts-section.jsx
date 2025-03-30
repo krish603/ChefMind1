@@ -1,44 +1,46 @@
 "use client"
 
 import { useState } from "react"
-import { AlertTriangle, Upload, AlertCircle } from "lucide-react"
+import { AlertTriangle, AlertCircle } from "lucide-react"
+import { uploadPhotoVideo } from "@/src/actions/inventoryActions"
 
 export function AlertsSection({ spoiledItems, lowStockItems }) {
-    const [isDragging, setIsDragging] = useState(false)
     const [uploadedFiles, setUploadedFiles] = useState([])
+    const [uploadResponse, setUploadResponse] = useState(null)
 
-    const handleDragOver = (e) => {
-        e.preventDefault()
-        setIsDragging(true)
-    }
+    const handleFileInput = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
 
-    const handleDragLeave = () => {
-        setIsDragging(false)
-    }
-
-    const handleDrop = (e) => {
-        e.preventDefault()
-        setIsDragging(false)
-
-        const files = Array.from(e.dataTransfer.files)
-        handleFiles(files)
-    }
-
-    const handleFileInput = (e) => {
-        const files = Array.from(e.target.files)
-        handleFiles(files)
-    }
-
-    const handleFiles = (files) => {
-        const newFiles = files.map((file) => ({
+        // Only update UI with basic file info
+        setUploadedFiles([{
             name: file.name,
-            type: file.type,
             size: file.size,
-            url: URL.createObjectURL(file),
-        }))
+            type: file.type
+        }]);
 
-        setUploadedFiles([...uploadedFiles, ...newFiles])
-    }
+        try {
+            // Convert file to base64 string
+            const reader = new FileReader();
+            const base64Data = await new Promise((resolve, reject) => {
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+
+            // Send only necessary data to server action
+            const response = await uploadPhotoVideo({
+                name: file.name,
+                type: file.type,
+                data: base64Data
+            });
+
+            setUploadResponse(response);
+        } catch (error) {
+            console.error("Upload Error:", error);
+            setUploadResponse({ error: "Failed to upload file" });
+        }
+    };
 
     return (
         <div className="space-y-6">
@@ -92,21 +94,14 @@ export function AlertsSection({ spoiledItems, lowStockItems }) {
             <div className="bg-white rounded-lg shadow-md p-6">
                 <h2 className="text-xl font-bold text-[#255653] mb-4">Upload Media</h2>
 
-                <div
-                    className={`border-2 border-dashed rounded-lg p-6 text-center ${isDragging ? "border-[#54aa52] bg-[#54aa52]/10" : "border-[#255653]/30"
-                        }`}
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDrop}
-                >
-                    <Upload className="mx-auto text-[#255653] mb-2" size={24} />
-                    <p className="text-[#255653] mb-2">Drag & drop photos or videos here</p>
-                    <p className="text-sm text-[#255653]/70 mb-4">or click to browse files</p>
+                <div className="border-2 border-dashed border-[#255653]/30 rounded-lg p-6 text-center">
+                    <p className="text-[#255653] mb-2">Click below to upload a photo or video</p>
+                    <p className="text-sm text-[#255653]/70 mb-4">Only one file can be uploaded at a time</p>
+
                     <input
                         type="file"
                         id="fileUpload"
                         className="hidden"
-                        multiple
                         accept="image/*,video/*"
                         onChange={handleFileInput}
                     />
@@ -114,7 +109,7 @@ export function AlertsSection({ spoiledItems, lowStockItems }) {
                         htmlFor="fileUpload"
                         className="bg-[#54aa52] text-white px-4 py-2 rounded-md cursor-pointer hover:bg-[#54aa52]/90 transition-colors"
                     >
-                        Browse Files
+                        Browse File
                     </label>
                 </div>
 
@@ -132,8 +127,17 @@ export function AlertsSection({ spoiledItems, lowStockItems }) {
                         </ul>
                     </div>
                 )}
+
+                {/* Display API response */}
+                {uploadResponse && (
+                    <div className="mt-4">
+                        <h3 className="font-semibold text-[#255653] mb-2">Server Response</h3>
+                        <pre className="text-sm bg-gray-100 p-3 rounded-lg text-[#255653]">
+                            {JSON.stringify(uploadResponse, null, 2)}
+                        </pre>
+                    </div>
+                )}
             </div>
         </div>
     )
 }
-

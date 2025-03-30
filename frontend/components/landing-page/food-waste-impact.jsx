@@ -28,8 +28,8 @@ export function FoodWasteImpact() {
     <section id="impact" className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#255653] mb-4">Food Waste Impact</h2>
-          <p className="text-lg md:text-xl text-[#54aa52] max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#255653] mb-6">Food Waste Impact</h2>
+          <p className="text-lg md:text-xl text-[#255653] font-semibold max-w-3xl mx-auto">
             Understanding the true cost of food waste is the first step toward reducing it.
           </p>
         </div>
@@ -38,8 +38,8 @@ export function FoodWasteImpact() {
           {impactData.map((item, index) => (
             <div key={index} className="bg-[#f9f6eb] p-6 rounded-lg text-center flex flex-col items-center">
               <div className="mb-4">{item.icon}</div>
-              <h3 className="text-xl font-semibold text-[#255653] mb-2">{item.title}</h3>
-              <p className="text-[#255653]">{item.description}</p>
+              <h3 className="text-xl font-bold text-[#255653] mb-2">{item.title}</h3>
+              <p className="text-[#255653] font-semibold">{item.description}</p>
             </div>
           ))}
         </div>

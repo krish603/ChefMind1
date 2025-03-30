@@ -14,12 +14,12 @@ export function Calculator() {
   const waterSavings = annualWaste * 7000 // 7000 liters per kg
 
   return (
-    <section id="calculator" className="py-16 md:py-24 bg-[#f0c14b]">
+    <section id="calculator" className="py-16 md:pt-18 pb-24 bg-[#f0c14b]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#255653] mb-4">Savings Calculator</h2>
-            <p className="text-lg md:text-xl text-[#255653]">
+            <h2 className="text-3xl md:text-5xl font-bold text-[#255653] mb-4">Savings Calculator</h2>
+            <p className="text-lg md:text-xl font-semibold text-[#255653]">
               See how much you could save by reducing food waste in your kitchen.
             </p>
           </div>

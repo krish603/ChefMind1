@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
-import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs"
+import {  SignUpButton } from "@clerk/nextjs"
 
 export function Navbar() {
   const fetchUserData = async () => {
@@ -34,33 +34,36 @@ export function Navbar() {
                 height={40}
                 className="mr-2"
               /> */}
-              <span className="text-[#255653] font-bold text-xl">ChefMind</span>
+              <span className="text-[#255653] font-bold text-3xl">ChefMind</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            <Link href="#how-it-works" className="text-[#255653] hover:text-[#54aa52] transition-colors">
+          <div className="hidden font-semibold md:flex space-x-8">
+            <Link href="#how-it-works" className="py-2 text-[#255653] hover:text-[#54aa52] transition-colors">
               How It Works
             </Link>
-            <Link href="#inventory" className="text-[#255653] hover:text-[#54aa52] transition-colors">
+            <Link href="#inventory" className="py-2 text-[#255653] hover:text-[#54aa52] transition-colors">
               Inventory
             </Link>
-            <Link href="#impact" className="text-[#255653] hover:text-[#54aa52] transition-colors">
+            <Link href="#impact" className="py-2 text-[#255653] hover:text-[#54aa52] transition-colors">
               Impact
             </Link>
-            <Link href="#calculator" className="text-[#255653] hover:text-[#54aa52] transition-colors">
+            <Link href="#calculator" className="py-2 text-[#255653] hover:text-[#54aa52] transition-colors">
               Savings Calculator
             </Link>
-            <Link href="#features" className="text-[#255653] hover:text-[#54aa52] transition-colors">
+            <Link href="#features" className="py-2 text-[#255653] hover:text-[#54aa52] transition-colors">
               Features
             </Link>
-            <Button
-              className=" bg-[#54aa52] hover:bg-[#255653] text-white"
+            {/* <Button
+              className=" bg-[#54aa52] mx-2 my-[1.5px] hover:bg-[#255653] text-white"
             >              <SignedOut>
-                <SignUpButton mode="modal" />
+                <SignUpButton mode="modal" >Get Started</SignUpButton>
               </SignedOut>
-            </Button>
+            </Button> */}
+            {/* <SignUpButton mode="modal">
+              <Button variant="outline" className="w-full">Sign Up</Button>
+            </SignUpButton> */}
           </div>
         </div>
       </div>

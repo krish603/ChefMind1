@@ -4,11 +4,11 @@ export function HowItWorks() {
   return (
     <section id="how-it-works" className="py-16 md:py-24 bg-[#f9f6eb]">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-[#255653] mb-12">How It Works</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-center text-[#255653] mb-12">How It Works</h2>
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2">
             <p className="text-lg md:text-xl text-[#255653] leading-relaxed">
-              Orbisk helps professional kitchens get a grip on their food waste. We measure and automatically recognize
+              ChefMind helps professional kitchens get a grip on their food waste. We measure and automatically recognize
               what kind of food is thrown away, in what quantity, and at what time of the day.
             </p>
             <div className="mt-8">
@@ -69,10 +69,10 @@ export function HowItWorks() {
           </div>
           <div className="md:w-1/2 mt-8 md:mt-0">
             <Image
-              src="/placeholder.svg?height=400&width=500"
+              src="/food-waste-tracking-system.png"
               alt="Food waste tracking system"
-              width={500}
-              height={400}
+              width={600}
+              height={600}
               className="rounded-lg shadow-lg"
             />
           </div>

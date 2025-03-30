@@ -25,11 +25,11 @@ export function KeyFeatures() {
   ]
 
   return (
-    <section id="features" className="py-16 md:py-24 bg-[#f9f6eb]">
+    <section id="features" className="py-16 md:py-18 bg-[#f9f6eb]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#255653] mb-4">Key Features</h2>
-          <p className="text-lg md:text-xl text-[#54aa52] max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#255653] mb-6">Key Features</h2>
+          <p className="text-lg md:text-xl font-semibold text-[#255653] max-w-3xl mx-auto">
             Our comprehensive solution offers everything you need to manage your kitchen inventory and reduce waste.
           </p>
         </div>
