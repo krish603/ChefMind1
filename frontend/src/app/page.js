@@ -7,7 +7,7 @@ import { InventoryManagement } from '@/components/landing-page/inventory-managem
 import { FoodWasteImpact } from '@/components/landing-page/food-waste-impact'
 import { Calculator } from '@/components/landing-page/calculator'
 import { KeyFeatures } from '@/components/landing-page/key-features'
-import LandingPage from './landing-page/page'
+import LandingPage from './(landing)/landing-page/page'
 
 export default function Home() {
   return (
