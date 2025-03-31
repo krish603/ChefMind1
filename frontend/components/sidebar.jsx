@@ -1,10 +1,13 @@
 'use client'
 import Link from 'next/link';
 import React from 'react'
+import { usePathname } from 'next/navigation';
+import { Soup,UtensilsCrossed,HandCoins  } from 'lucide-react';
 
 const Sidebar = () => {
+    const pathname = usePathname()
     const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
-    const [activePage, setActivePage] = React.useState('/dashboard'); // Track active page
+    const [activePage, setActivePage] = React.useState(pathname); // Track active page
 
     // Navigation items to avoid repetition
     const navItems = [
@@ -22,11 +25,29 @@ const Sidebar = () => {
             title: 'Food Prediction',
             href: '/food-prediction',
             icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        },
+        {
+            title: 'Recipe Recommendation',
+            href: '/recipe-recommendations',
+            icon: <Soup className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" />
+        },
+        {
+            title: 'Cost Optimization',
+            href: '/cost-optimization',
+            icon: <HandCoins className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" />
+
+        },
+        {
+            title: 'Custom Dish Creator',
+            href: '/custom-dish-creator',
+            icon: <UtensilsCrossed className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" />
+
         }
     ];
 
     return (
         <>
+
             {/* Mobile Menu Button with animation */}
             <button
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
