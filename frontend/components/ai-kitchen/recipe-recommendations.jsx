@@ -39,6 +39,7 @@ const MOCK_RECOMMENDATIONS = [
         wasteReduction: 17.85,
         mealType: "dessert",
     },
+    
 ]
 
 export default function RecipeRecommendations() {
@@ -65,7 +66,7 @@ export default function RecipeRecommendations() {
     return (
         <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
             {/* Header Section with Improved Layout */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-[#e8f5e9] to-white p-6 rounded-lg shadow-sm">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#fff]  p-6 rounded-lg shadow-sm">
                 <div className="flex items-center gap-3">
                     <div>
                         <h1 className="text-3xl font-bold text-[#1e4d40]">Recipe Recommendations</h1>

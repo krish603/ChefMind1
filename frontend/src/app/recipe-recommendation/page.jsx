@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function RecipeRecommendationsPage() {
     return (
-        <div className="p-6 space-y-6">
+        <div className="p-6 bg-amber-50 h-full space-y-6">
             <RecipeRecommendations />
         </div>
     );

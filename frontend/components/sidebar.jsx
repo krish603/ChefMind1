@@ -28,7 +28,7 @@ const Sidebar = () => {
         },
         {
             title: 'Recipe Recommendation',
-            href: '/recipe-recommendations',
+            href: '/recipe-recommendation',
             icon: <Soup className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" />
         },
         {
