@@ -7,13 +7,29 @@ import { InventoryManagement } from '@/components/landing-page/inventory-managem
 import { FoodWasteImpact } from '@/components/landing-page/food-waste-impact'
 import { Calculator } from '@/components/landing-page/calculator'
 import { KeyFeatures } from '@/components/landing-page/key-features'
-import LandingPage from './landing-page/page'
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <div>
     <main className="min-h-screen">
-      <LandingPage/>
+      <Navbar />
+      <HeroSection />
+      <HowItWorks />
+      <RestaurantLogos />
+      <InventoryManagement />
+      <FoodWasteImpact />
+      <Calculator />
+      <KeyFeatures />
+      <footer className="bg-[#255653] text-[#f9f6eb] py-8 text-center">
+        <div className="container mx-auto">
+          <p>© {new Date().getFullYear()} ChefMind. All rights reserved.</p>
+        </div>
+      </footer>
+      <div className="bg-[#f9f6eb] py-8">
+        <div className="container mx-auto text-center">
+          <p>Made with ❤️ by ChefMind Team</p>
+        </div>
+        </div>
     </main>
     </div>
   )
