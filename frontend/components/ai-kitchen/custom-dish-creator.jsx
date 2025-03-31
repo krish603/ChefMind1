@@ -89,7 +89,7 @@ export default function CustomDishCreator() {
     )
 
     return (
-        <div className="container mx-auto py-6 max-w-7xl">
+        <div className="container bg-[#fff] mx-auto py-6 max-w-7xl">
             <div className="flex items-center justify-between mb-6">
                 <div>
                     <h1 className="text-2xl font-bold text-[#1e4d40] flex items-center">

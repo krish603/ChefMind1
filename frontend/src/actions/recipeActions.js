@@ -2,7 +2,7 @@
 
 export async function getRecipe() {
     try {
-        const response = await fetch("https://60f5-2409-40c1-500f-dfe2-4d09-9cc9-9f41-a7db.ngrok-free.app/recipe_recommendations", {
+        const response = await fetch("https://1a17-202-131-110-12.ngrok-free.app/recipe_recommendations", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

@@ -116,7 +116,7 @@ export function AlertsSection() {
             </div>
 
             {/* Alerts Section */}
-            <div className="bg-[#255653] rounded-lg shadow-md p-6 text-[#]">
+            <div className="bg-[#fff] rounded-lg shadow-md p-6 text-[#]">
                 <h2 className="text-xl font-bold mb-4 flex items-center">
                     <AlertCircle className="mr-2" size={20} />
                     Alerts & Warnings

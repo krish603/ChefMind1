@@ -3,7 +3,7 @@
 export async function demand(name){
 try {
     
-    const result =await fetch(`https://60f5-2409-40c1-500f-dfe2-4d09-9cc9-9f41-a7db.ngrok-free.app/api/patterns/${name}`, {
+    const result =await fetch(`https://1a17-202-131-110-12.ngrok-free.app/api/patterns/${name}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -25,7 +25,7 @@ return {success: true, data: data};
 export async function forecast(name){
     try {
     
-        const result =await fetch(`https://60f5-2409-40c1-500f-dfe2-4d09-9cc9-9f41-a7db.ngrok-free.app/api/forecast/${name}`, {
+        const result =await fetch(`https://1a17-202-131-110-12.ngrok-free.app/api/forecast/${name}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export async function forecast(name){
 export async function waste(name){
     try {
     
-        const result =await fetch(`https://60f5-2409-40c1-500f-dfe2-4d09-9cc9-9f41-a7db.ngrok-free.app/waste_prediction/${name}`, {
+        const result =await fetch(`https://1a17-202-131-110-12.ngrok-free.app/waste_prediction/${name}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export async function waste(name){
 export async function ingredients(){
     try {
     
-        const result =await fetch(`https://60f5-2409-40c1-500f-dfe2-4d09-9cc9-9f41-a7db.ngrok-free.app/api/ingredients`, {
+        const result =await fetch(`https://1a17-202-131-110-12.ngrok-free.app/api/ingredients`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
