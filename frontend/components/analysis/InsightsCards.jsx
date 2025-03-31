@@ -15,21 +15,29 @@ const InsightsCards = ({ wasteRatio, demandData, timeframe, item }) => {
         const fetchRecommendation = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`/api/ingredient-history/${encodeURIComponent(item)}`);
+                const response = await fetch(`https://60f5-2409-40c1-500f-dfe2-4d09-9cc9-9f41-a7db.ngrok-free.app/api/ingredient-history/${item}`,{
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
                 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                
-                const data = await response.json();
+                const data = await response.json(); // Convert response to JSON
+        
+                console.log("Recommendation data:", data);
                 setRecommendation(data.recommendation);
             } catch (err) {
-                console.error("Error fetching recommendation:", err);
+                console.log("Error fetching recommendation:", err);
                 setError(err.message);
             } finally {
                 setLoading(false);
             }
         };
+        
+        
 
         fetchRecommendation();
     }, [item]);

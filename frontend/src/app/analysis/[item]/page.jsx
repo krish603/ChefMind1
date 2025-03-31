@@ -9,9 +9,10 @@ import ForecastChart from "@/components/analysis/forecast-chart";
 import LoadingState from "@/components/loading-state";
 import DemandAnalysisCard from "@/components/analysis/DemandAnalysisCard";
 import { Chart, registerables } from "chart.js";
-// import DemandAnalysisChart from "@/components/food-prediction/DemandAnalysisChart";
 
 Chart.register(...registerables); // Register all components
+
+
 
 const AnalysisPage = ({ params }) => {
     const router = useRouter();
@@ -19,7 +20,7 @@ const AnalysisPage = ({ params }) => {
     const [isClient, setIsClient] = useState(false);
     const [wasteRatio, setWasteRatio] = useState("0");
     const [timeframe, setTimeframe] = useState('weekly');
-    const [demandData, setDemandData] = useState({});
+    const [demandData, setDemandData] = useState({"0": []});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -70,6 +71,7 @@ const AnalysisPage = ({ params }) => {
                     wasteRatio={wasteRatio} 
                     demandData={demandData} 
                     timeframe={timeframe} 
+                    item={item}
                 />
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -79,6 +81,7 @@ const AnalysisPage = ({ params }) => {
                             timeframe={timeframe} 
                             setTimeframe={setTimeframe} 
                             isClient={isClient} 
+                            item={item}
                         />
                     )}
                     

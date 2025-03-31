@@ -14,7 +14,7 @@ try {
         throw new Error(`Error: ${result.statusText}`);
     }
     const data = await result.json();
-    console.log("Data fetched successfully demand:", data);
+    // console.log("Data fetched successfully demand:", data);
 return {success: true, data: data};
 } catch (error) {
     console.error("Error fetching data:", error);
@@ -36,7 +36,7 @@ export async function forecast(name){
             throw new Error(`Error: ${result.statusText}`);
         }
         const data = await result.json();
-        console.log("Data fetched successfully forecast:", data);
+        // console.log("Data fetched successfully forecast:", data);
     return {success: true, data: data};
     } catch (error) {
         console.error("Error fetching data:", error);
@@ -58,7 +58,7 @@ export async function waste(name){
             throw new Error(`Error: ${result.statusText}`);
         }
         const data = await result.json();
-        console.log("Data fetched successfully waste :", data);
+        // console.log("Data fetched successfully waste :", data);
     return {success: true, data: data};
     } catch (error) {
         console.error("Error fetching data:", error);

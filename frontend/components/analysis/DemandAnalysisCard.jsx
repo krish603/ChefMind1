@@ -1,79 +1,96 @@
 "use client";
-import React from 'react';
+import React, { useEffect ,useState} from 'react';
 import { Line } from 'react-chartjs-2';
 import { Card, CardContent } from "@/components/ui/card";
+import { demand } from '@/src/actions/graphActions';
+const DemandAnalysisCard = ({ timeframe, setTimeframe, isClient, item }) => {   
+    // const ingredientData = {
+    //     ingredient: item,
+    //     patterns: {
+    //         weekly: [
+    //             { DayOfWeek: 0, DayName: "Monday", Demand: 30.61 },
+    //             { DayOfWeek: 1, DayName: "Tuesday", Demand: 30.56 },
+    //             { DayOfWeek: 2, DayName: "Wednesday", Demand: 30.09 },
+    //             { DayOfWeek: 3, DayName: "Thursday", Demand: 30.28 },
+    //             { DayOfWeek: 4, DayName: "Friday", Demand: 30.26 },
+    //             { DayOfWeek: 5, DayName: "Saturday", Demand: 36.42 },
+    //             { DayOfWeek: 6, DayName: "Sunday", Demand: 36.84 }
+    //         ],
+    //         monthly: [
+    //             { Month: 1, MonthName: "January", Demand: 32.81 },
+    //             { Month: 2, MonthName: "February", Demand: 35.12 },
+    //             { Month: 3, MonthName: "March", Demand: 36.02 },
+    //             { Month: 4, MonthName: "April", Demand: 36.05 },
+    //             { Month: 5, MonthName: "May", Demand: 34.44 },
+    //             { Month: 6, MonthName: "June", Demand: 31.03 },
+    //             { Month: 7, MonthName: "July", Demand: 31.45 },
+    //             { Month: 8, MonthName: "August", Demand: 26.06 },
+    //             { Month: 9, MonthName: "September", Demand: 25.75 },
+    //             { Month: 10, MonthName: "October", Demand: 26.90 },
+    //             { Month: 11, MonthName: "November", Demand: 28.83 },
+    //             { Month: 12, MonthName: "December", Demand: 41.34 }
+    //         ],
+    //         yearly: [
+    //             { Year: 2023, Demand: 30.67 },
+    //             { Year: 2024, Demand: 33.62 },
+    //             { Year: 2025, Demand: 33.00 }
+    //         ],
+    //         daily: [
+    //             { Day: 1, Demand: 32.72 },
+    //             { Day: 2, Demand: 31.21 },
+    //             { Day: 3, Demand: 31.92 },
+    //             { Day: 4, Demand: 32.50 },
+    //             { Day: 5, Demand: 31.63 },
+    //             { Day: 6, Demand: 32.04 },
+    //             { Day: 7, Demand: 32.17 },
+    //             { Day: 8, Demand: 30.88 },
+    //             { Day: 9, Demand: 31.79 },
+    //             { Day: 10, Demand: 31.75 },
+    //             { Day: 11, Demand: 31.92 },
+    //             { Day: 12, Demand: 30.38 },
+    //             { Day: 13, Demand: 30.25 },
+    //             { Day: 14, Demand: 32.33 },
+    //             { Day: 15, Demand: 32.96 },
+    //             { Day: 16, Demand: 32.29 },
+    //             { Day: 17, Demand: 32.08 },
+    //             { Day: 18, Demand: 32.00 },
+    //             { Day: 19, Demand: 32.00 },
+    //             { Day: 20, Demand: 32.38 },
+    //             { Day: 21, Demand: 32.00 },
+    //             { Day: 22, Demand: 33.71 },
+    //             { Day: 23, Demand: 32.33 },
+    //             { Day: 24, Demand: 33.75 },
+    //             { Day: 25, Demand: 31.79 },
+    //             { Day: 26, Demand: 32.50 },
+    //             { Day: 27, Demand: 32.38 },
+    //             { Day: 28, Demand: 32.21 },
+    //             { Day: 29, Demand: 33.17 },
+    //             { Day: 30, Demand: 33.36 },
+    //             { Day: 31, Demand: 32.57 }
+    //         ]
+    //     }
+    // };
 
-const DemandAnalysisCard = ({ timeframe, setTimeframe, isClient, item }) => {
-    // Dummy data structure
-    const ingredientData = {
-        ingredient: item,
-        patterns: {
-            weekly: [
-                { DayOfWeek: 0, DayName: "Monday", Demand: 30.61 },
-                { DayOfWeek: 1, DayName: "Tuesday", Demand: 30.56 },
-                { DayOfWeek: 2, DayName: "Wednesday", Demand: 30.09 },
-                { DayOfWeek: 3, DayName: "Thursday", Demand: 30.28 },
-                { DayOfWeek: 4, DayName: "Friday", Demand: 30.26 },
-                { DayOfWeek: 5, DayName: "Saturday", Demand: 36.42 },
-                { DayOfWeek: 6, DayName: "Sunday", Demand: 36.84 }
-            ],
-            monthly: [
-                { Month: 1, MonthName: "January", Demand: 32.81 },
-                { Month: 2, MonthName: "February", Demand: 35.12 },
-                { Month: 3, MonthName: "March", Demand: 36.02 },
-                { Month: 4, MonthName: "April", Demand: 36.05 },
-                { Month: 5, MonthName: "May", Demand: 34.44 },
-                { Month: 6, MonthName: "June", Demand: 31.03 },
-                { Month: 7, MonthName: "July", Demand: 31.45 },
-                { Month: 8, MonthName: "August", Demand: 26.06 },
-                { Month: 9, MonthName: "September", Demand: 25.75 },
-                { Month: 10, MonthName: "October", Demand: 26.90 },
-                { Month: 11, MonthName: "November", Demand: 28.83 },
-                { Month: 12, MonthName: "December", Demand: 41.34 }
-            ],
-            yearly: [
-                { Year: 2023, Demand: 30.67 },
-                { Year: 2024, Demand: 33.62 },
-                { Year: 2025, Demand: 33.00 }
-            ],
-            daily: [
-                { Day: 1, Demand: 32.72 },
-                { Day: 2, Demand: 31.21 },
-                { Day: 3, Demand: 31.92 },
-                { Day: 4, Demand: 32.50 },
-                { Day: 5, Demand: 31.63 },
-                { Day: 6, Demand: 32.04 },
-                { Day: 7, Demand: 32.17 },
-                { Day: 8, Demand: 30.88 },
-                { Day: 9, Demand: 31.79 },
-                { Day: 10, Demand: 31.75 },
-                { Day: 11, Demand: 31.92 },
-                { Day: 12, Demand: 30.38 },
-                { Day: 13, Demand: 30.25 },
-                { Day: 14, Demand: 32.33 },
-                { Day: 15, Demand: 32.96 },
-                { Day: 16, Demand: 32.29 },
-                { Day: 17, Demand: 32.08 },
-                { Day: 18, Demand: 32.00 },
-                { Day: 19, Demand: 32.00 },
-                { Day: 20, Demand: 32.38 },
-                { Day: 21, Demand: 32.00 },
-                { Day: 22, Demand: 33.71 },
-                { Day: 23, Demand: 32.33 },
-                { Day: 24, Demand: 33.75 },
-                { Day: 25, Demand: 31.79 },
-                { Day: 26, Demand: 32.50 },
-                { Day: 27, Demand: 32.38 },
-                { Day: 28, Demand: 32.21 },
-                { Day: 29, Demand: 33.17 },
-                { Day: 30, Demand: 33.36 },
-                { Day: 31, Demand: 32.57 }
-            ]
-        }
-    };
+    const [ingredientData, setIngredientData] = useState(null)
+useEffect(() => {
+    try {
+        const fetchDemandData = async () => {
+            const response = await demand(item);
+            if (response && response.success) {
+                console.log("Demand data fetched successfully:", response.data);
+                setIngredientData(response.data);
+            } else {
+                console.error("Failed to fetch demand data:", response.message);
+            }
+        };
+        fetchDemandData();
+    } catch (error) {
+        
+    }
+},[])
 
     // Get the current data based on timeframe
-    const currentData = ingredientData.patterns[timeframe];
+    const currentData = ingredientData?.patterns["weekly"] ;
     
     if (!currentData || currentData.length === 0) {
         return (

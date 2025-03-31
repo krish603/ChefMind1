@@ -76,8 +76,47 @@ export function AlertsSection() {
 
     return (
         <div className="space-y-6">
+            {/* Upload Section */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+                <h2 className="text-xl font-bold text-[#255653] mb-4">Upload Media</h2>
+
+                <div className="border-2 border-dashed border-[#255653]/30 rounded-lg p-6 text-center">
+                    <p className="text-[#255653] mb-2">Click below to upload a photo or video</p>
+                    <p className="text-sm text-[#255653]/70 mb-4">Only one file can be uploaded at a time</p>
+
+                    <input
+                        type="file"
+                        id="fileUpload"
+                        className="hidden"
+                        accept="image/*,video/*"
+                        onChange={handleFileInput}
+                    />
+                    <label
+                        htmlFor="fileUpload"
+                        className="bg-[#54aa52] text-white px-4 py-2 rounded-md cursor-pointer hover:bg-[#54aa52]/90 transition-colors"
+                    >
+                        Browse File
+                    </label>
+                </div>
+
+                {/* Display uploaded files */}
+                {uploadedFiles.length > 0 && (
+                    <div className="mt-4">
+                        <h3 className="font-semibold text-[#255653] mb-2">Uploaded Files</h3>
+                        <ul className="space-y-2">
+                            {uploadedFiles.map((file, index) => (
+                                <li key={index} className="flex items-center text-[#255653]">
+                                    <span className="truncate">{file.name}</span>
+                                    <span className="text-xs ml-2 text-[#255653]/70">({(file.size / 1024).toFixed(1)} KB)</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </div>
+
             {/* Alerts Section */}
-            <div className="bg-[#255653] rounded-lg shadow-md p-6 text-[#faf6eb]">
+            <div className="bg-[#255653] rounded-lg shadow-md p-6 text-[#]">
                 <h2 className="text-xl font-bold mb-4 flex items-center">
                     <AlertCircle className="mr-2" size={20} />
                     Alerts & Warnings
@@ -120,46 +159,6 @@ export function AlertsSection() {
                         </ul>
                     )}
                 </div>
-            </div>
-              
-
-            {/* Upload Section */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-bold text-[#255653] mb-4">Upload Media</h2>
-
-                <div className="border-2 border-dashed border-[#255653]/30 rounded-lg p-6 text-center">
-                    <p className="text-[#255653] mb-2">Click below to upload a photo or video</p>
-                    <p className="text-sm text-[#255653]/70 mb-4">Only one file can be uploaded at a time</p>
-
-                    <input
-                        type="file"
-                        id="fileUpload"
-                        className="hidden"
-                        accept="image/*,video/*"
-                        onChange={handleFileInput}
-                    />
-                    <label
-                        htmlFor="fileUpload"
-                        className="bg-[#54aa52] text-white px-4 py-2 rounded-md cursor-pointer hover:bg-[#54aa52]/90 transition-colors"
-                    >
-                        Browse File
-                    </label>
-                </div>
-
-                {/* Display uploaded files */}
-                {uploadedFiles.length > 0 && (
-                    <div className="mt-4">
-                        <h3 className="font-semibold text-[#255653] mb-2">Uploaded Files</h3>
-                        <ul className="space-y-2">
-                            {uploadedFiles.map((file, index) => (
-                                <li key={index} className="flex items-center text-[#255653]">
-                                    <span className="truncate">{file.name}</span>
-                                    <span className="text-xs ml-2 text-[#255653]/70">({(file.size / 1024).toFixed(1)} KB)</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
             </div>
         </div>
     )

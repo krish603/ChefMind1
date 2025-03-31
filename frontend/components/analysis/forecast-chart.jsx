@@ -1,7 +1,8 @@
 // ForecastChart.jsx
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card"
+import { forecast } from "@/src/actions/graphActions";;
 
 const ForecastChart = ({ item, timeframe, isClient }) => {
   // State for forecast data
@@ -11,54 +12,60 @@ const ForecastChart = ({ item, timeframe, isClient }) => {
   // Simulate API fetch with the provided dummy data
   useEffect(() => {
     // This would be replaced with your actual API call
-    const fetchForecastData = () => {
+    const fetchForecastData = async() => {
       // Dummy data from your JSON
-      const dummyResponse = {
-        "ingredient": "Tomatoes",
-        "forecast": [
-          { "Date": "2024-08-08", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-08-09", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-08-10", "Ingredient": "Tomatoes", "Predicted_Demand": 33 },
-          { "Date": "2024-08-11", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
-          { "Date": "2024-08-12", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-08-13", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-08-14", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-08-15", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-08-16", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-08-17", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
-          { "Date": "2024-08-18", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
-          { "Date": "2024-08-19", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-08-20", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
-          { "Date": "2024-08-21", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
-          { "Date": "2024-08-22", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-08-23", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
-          { "Date": "2024-08-24", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
-          { "Date": "2024-08-25", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
-          { "Date": "2024-08-26", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-08-27", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
-          { "Date": "2024-08-28", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
-          { "Date": "2024-08-29", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-08-30", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
-          { "Date": "2024-08-31", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
-          { "Date": "2024-09-01", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
-          { "Date": "2024-09-02", "Ingredient": "Tomatoes", "Predicted_Demand": 27 },
-          { "Date": "2024-09-03", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
-          { "Date": "2024-09-04", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
-          { "Date": "2024-09-05", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
-          { "Date": "2024-09-06", "Ingredient": "Tomatoes", "Predicted_Demand": 26 }
-        ],
-        "metrics": {
-          "mae": 2.80844837697304,
-          "rmse": 3.81810344533877
-        }
-      };
+      // const dummyResponse = {
+      //   "ingredient": "Tomatoes",
+      //   "forecast": [
+      //     { "Date": "2024-08-08", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-08-09", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-08-10", "Ingredient": "Tomatoes", "Predicted_Demand": 33 },
+      //     { "Date": "2024-08-11", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
+      //     { "Date": "2024-08-12", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-08-13", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-08-14", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-08-15", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-08-16", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-08-17", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
+      //     { "Date": "2024-08-18", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
+      //     { "Date": "2024-08-19", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-08-20", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
+      //     { "Date": "2024-08-21", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
+      //     { "Date": "2024-08-22", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-08-23", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
+      //     { "Date": "2024-08-24", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
+      //     { "Date": "2024-08-25", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
+      //     { "Date": "2024-08-26", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-08-27", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
+      //     { "Date": "2024-08-28", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
+      //     { "Date": "2024-08-29", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-08-30", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
+      //     { "Date": "2024-08-31", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
+      //     { "Date": "2024-09-01", "Ingredient": "Tomatoes", "Predicted_Demand": 32 },
+      //     { "Date": "2024-09-02", "Ingredient": "Tomatoes", "Predicted_Demand": 27 },
+      //     { "Date": "2024-09-03", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
+      //     { "Date": "2024-09-04", "Ingredient": "Tomatoes", "Predicted_Demand": 25 },
+      //     { "Date": "2024-09-05", "Ingredient": "Tomatoes", "Predicted_Demand": 26 },
+      //     { "Date": "2024-09-06", "Ingredient": "Tomatoes", "Predicted_Demand": 26 }
+      //   ],
+      //   "metrics": {
+      //     "mae": 2.80844837697304,
+      //     "rmse": 3.81810344533877
+      //   }
+      // };
       
+
+      const result= await forecast(item);
+      
+      if (result && result.success) {
+        const dummyResponse = result.data;
       setForecastData(dummyResponse.forecast);
       setMetrics(dummyResponse.metrics);
-    };
+    };}
     
     fetchForecastData();
-  }, [item]); // Refetch when item changes
+  }, [item]);
+   
   
   // Process data based on timeframe
   const getProcessedData = () => {
