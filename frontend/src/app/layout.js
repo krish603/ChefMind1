@@ -27,11 +27,10 @@ export default function RootLayout({ children }) {
       <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="min-h-screen flex flex-col lg:flex-row">
-          {/* The sidebar component now handles its own positioning and visibility */}
-          <Sidebar />
+         
           
           {/* Main Content - Adaptive margin based on sidebar state */}
-          <main className="flex-1 w-full lg:ml-64 transition-all duration-300">
+          <main className="flex-1 w-full lg: transition-all duration-300">
             {children}
           </main>
         </div>
